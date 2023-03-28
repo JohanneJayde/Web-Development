@@ -1,0 +1,52 @@
+#game{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 600px;
+}
+
+.tile{
+    width: 100px;
+    height: 100px;
+    background-color: blue;
+    border: solid 1px white;
+    color: white;
+}
+
+.row{
+    display: flex;
+    flex-direction: row;
+}
+
+#grid{
+    display: flex;
+    flex-direction: column;
+
+}
+
+.tile:focus{
+    background-color: greenyellow;
+}
+
+.charPos{
+    border: solid 1px pink;
+    background-color: white;
+}
+
+.messageLog{
+    height: 100%;
+    width: 700px;
+    background-color: white;
+    border: solid 3px grey;
+    overflow: hidden;
+    overflow-y:scroll;
+}
+
+#grid{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 320px;
+    height: 320px;
+    background-color: yellow;
+}
+
