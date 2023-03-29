@@ -5,7 +5,7 @@ class CharacterPiece{
 
     constructor(pos){
         this.pos = pos;
-        this.bounds = {right: true, left: true, up: true, down: true}
+        this.bounds = {right: false, left: false, up: false, down: false}
         this.moves = {
             upMove: Number(pos.id) - 12,
             downMove:  Number(pos.id) + 12,
@@ -13,7 +13,7 @@ class CharacterPiece{
             rightMove: Number(pos.id) + 1
         };
     }
-    enableMove(bound){
+    disableMove(bound){
         switch(bound){
             case 'up':
                 this.bounds.up = true;
@@ -22,14 +22,14 @@ class CharacterPiece{
                 this.bounds.down = true;
                 break;
             case 'left':
-                this.bounds.down = true;
+                this.bounds.left = true;
                 break;
             case 'right':
-                this.bounds.down = true;
+                this.bounds.right = true;
                 break;
         }
     }
-    disableMove(bound){
+    enableMove(bound){
         switch(bound){
             case 'up':
                 this.bounds.up = false;
@@ -38,10 +38,10 @@ class CharacterPiece{
                 this.bounds.down = false;
                 break;
             case 'left':
-                this.bounds.down = false;
+                this.bounds.left = false;
                 break;
             case 'right':
-                this.bounds.down = false;
+                this.bounds.right = false;
                 break;
         }
     }
@@ -63,7 +63,7 @@ class CharacterPiece{
     get getLowerBound(){
         return this.bounds.down;
     }
-    get getleftBound(){
+    get getLeftBound(){
         return this.bounds.left;
     }
     get getRightBound(){
@@ -87,11 +87,13 @@ function updatePos(pos){
 
     pos.classList.add("charPos");
     character.updatePos(pos);
+    updateMoveStatus();
+
     const posTile = Number(pos.id);
     writeToMovementOptions(character.getMoveOptions);
     writeMoveStatuses(character.bounds);
     normalMove(posTile);
-    
+
 }
 
 document.addEventListener("keydown", move);
@@ -99,10 +101,11 @@ document.addEventListener("keydown", move);
 document.getElementById("reset").addEventListener("click", resetPos);
 
 function updateMoveStatus(){
-    const moveOptions = character.moves;
+    const moveOptions = character.getMoveOptions;
 
     if(isBorder(moveOptions.upMove)){
         character.disableMove("up");
+
     }
     else{
         character.enableMove("up");
@@ -110,7 +113,6 @@ function updateMoveStatus(){
     }
     if(isBorder(moveOptions.downMove)){
         character.disableMove("down");
-
     }
     else{
         character.enableMove("down");
@@ -120,10 +122,11 @@ function updateMoveStatus(){
 
     }
     else{
-        character.enableMove("left")
+        character.enableMove("left");
     }
     if(isBorder(moveOptions.rightMove)){
-        character.disableMove("right");
+
+        character.disableMove('right');
 
     }
     else{
@@ -136,7 +139,6 @@ function isBorder(tile){
     const tileClasses = Array.from(document.getElementById(tile.toString()).classList);
 
     if(tileClasses.includes("border")){
-        alert(tile + " is a border!");
         return true;
     }
     else{
@@ -152,8 +154,6 @@ function resetPos(){
 }
 
 function normalMove(posTile){
-    updateMoveStatus();
-
         setMovementOption("up", posTile);
         setMovementOption("down", posTile);
         setMovementOption("left", posTile);
@@ -219,14 +219,6 @@ function setMovementOption(moveOption, posTile){
             rightPos.classList.add("right");
             break;
     }
-}
-
-function checkOutOfBounds(pos){
-
-    if(Array.from(pos.classList).includes("border"))
-        return true;
-
-    return false;
 }
 
 function isLeftBound(pos){
@@ -314,13 +306,13 @@ function writeToMovementOptions(moveOptions){
 function writeMoveStatuses(moveStatus){
 
     const upMove = document.getElementById("upStatus");
-    upMove.innerHTML = moveStatus.up;
+    upMove.innerHTML = "UP: " + moveStatus.up;
     const downMove = document.getElementById("downStatus");
-    downMove.innerHTML = moveStatus.down;
+    downMove.innerHTML = "DOWN: " + moveStatus.down;
     const leftMove = document.getElementById("leftStatus");
-    leftMove.innerHTML = moveStatus.left;
+    leftMove.innerHTML = "LEFT: " + moveStatus.left;
     const rightMove = document.getElementById("rightStatus");
-    rightMove.innerHTML = moveStatus.right;
+    rightMove.innerHTML = "RIGHT: " + moveStatus.right;
 
 }
 
