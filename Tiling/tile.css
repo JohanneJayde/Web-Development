@@ -1,42 +1,41 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 
-#game{
+#game {
     display: grid;
     grid-template-columns: 1fr 1fr;
 
 }
 
-body{
+body {
     font-family: "lato";
 }
 
-.tile{
+.tile {
     font-family: "lato";
     width: 75px;
     height: 75px;
-    background-color: Silver
-    ;
+    background-color: Silver;
     border: solid 1px white;
     color: White;
 }
 
-.row{
+.row {
     display: flex;
     flex-direction: row;
 }
 
-#grid{
+#grid {
     display: flex;
     flex-direction: column;
 
 }
 
-.charPos{
+.charPos {
     border: solid 1px pink;
     background-color: #737CA1;
 }
 
-.messageLog{
+.messageLog {
     height: 150px;
     width: 700px;
     font-size: 50px;
@@ -45,7 +44,7 @@ body{
 
 }
 
-#grid{
+#grid {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -54,19 +53,21 @@ body{
 
 }
 
-.border{
+.border {
     background-color: salmon;
     color: salmon;
     border: solid 1px silver;
 }
-#info{
+
+#info {
     height: 100%;
     width: 100%;
     display: flex;
     flex-direction: column;
     gap: 3em;
 }
-#movementOptions{
+
+#movementOptions {
     width: 100%;
     height: 200px;
     background-color: salmon;
@@ -76,7 +77,7 @@ body{
     align-items: center;
 }
 
-#movementStatus{
+#movementStatus {
     width: 100%;
     height: 200px;
     background-color: salmon;
@@ -87,7 +88,7 @@ body{
 
 }
 
-.moveOption{
+.moveOption {
     font-family: "lato";
     border: solid 2px #737CA1;
     width: 100px;
@@ -96,22 +97,23 @@ body{
     background-color: white;
 }
 
-.key{
+.key {
     height: 50px;
     width: 50px;
     border: solid 2px black;
     background-color: white;
-    font-size: 25px;;
+    font-size: 25px;
+    ;
     color: black;
 }
 
-#keypad{
+#keypad {
     display: flex;
     flex-direction: row;
 
 }
 
-.pressed{
+.pressed {
     background-color: black;
     color: white;
 }

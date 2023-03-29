@@ -1,20 +1,20 @@
 
 const tiles = document.getElementsByClassName("tile");
 
-class CharacterPiece{
+class CharacterPiece {
 
-    constructor(pos){
+    constructor(pos) {
         this.pos = pos;
-        this.bounds = {right: false, left: false, up: false, down: false}
+        this.bounds = { right: false, left: false, up: false, down: false }
         this.moves = {
             upMove: Number(pos.id) - 12,
-            downMove:  Number(pos.id) + 12,
-            leftMove: Number(pos.id) -1,
+            downMove: Number(pos.id) + 12,
+            leftMove: Number(pos.id) - 1,
             rightMove: Number(pos.id) + 1
         };
     }
-    disableMove(bound){
-        switch(bound){
+    disableMove(bound) {
+        switch (bound) {
             case 'up':
                 this.bounds.up = true;
                 break;
@@ -29,8 +29,8 @@ class CharacterPiece{
                 break;
         }
     }
-    enableMove(bound){
-        switch(bound){
+    enableMove(bound) {
+        switch (bound) {
             case 'up':
                 this.bounds.up = false;
                 break;
@@ -45,31 +45,31 @@ class CharacterPiece{
                 break;
         }
     }
-    updateMoves(pos){
+    updateMoves(pos) {
         this.moves = {
             upMove: Number(pos.id) - 12,
-            downMove:  Number(pos.id) + 12,
-            leftMove: Number(pos.id) -1,
+            downMove: Number(pos.id) + 12,
+            leftMove: Number(pos.id) - 1,
             rightMove: Number(pos.id) + 1
         };
     }
-    updatePos(pos){
+    updatePos(pos) {
         this.pos = pos;
         this.updateMoves(pos);
     }
-    get getUpperBound(){
+    get getUpperBound() {
         return this.bounds.up;
     }
-    get getLowerBound(){
+    get getLowerBound() {
         return this.bounds.down;
     }
-    get getLeftBound(){
+    get getLeftBound() {
         return this.bounds.left;
     }
-    get getRightBound(){
+    get getRightBound() {
         return this.bounds.right;
     }
-    get getMoveOptions(){
+    get getMoveOptions() {
         return this.moves;
     }
 
@@ -83,7 +83,7 @@ setLowerBouunds();
 setLeftBounds();
 setRightBouunds()
 
-function updatePos(pos){
+function updatePos(pos) {
 
     pos.classList.add("charPos");
     character.updatePos(pos);
@@ -103,118 +103,118 @@ document.addEventListener("keyup", clearKey);
 
 document.getElementById("reset").addEventListener("click", resetPos);
 
-function updateMoveStatus(){
+function updateMoveStatus() {
     const moveOptions = character.getMoveOptions;
 
-    if(isBorder(moveOptions.upMove)){
+    if (isBorder(moveOptions.upMove)) {
         character.disableMove("up");
 
     }
-    else{
+    else {
         character.enableMove("up");
 
     }
-    if(isBorder(moveOptions.downMove)){
+    if (isBorder(moveOptions.downMove)) {
         character.disableMove("down");
     }
-    else{
+    else {
         character.enableMove("down");
     }
-    if(isBorder(moveOptions.leftMove)){
+    if (isBorder(moveOptions.leftMove)) {
         character.disableMove("left");
 
     }
-    else{
+    else {
         character.enableMove("left");
     }
-    if(isBorder(moveOptions.rightMove)){
+    if (isBorder(moveOptions.rightMove)) {
 
         character.disableMove('right');
 
     }
-    else{
+    else {
         character.enableMove("right");
     }
 
 }
 
-function isBorder(tile){
+function isBorder(tile) {
     const tileClasses = Array.from(document.getElementById(tile.toString()).classList);
 
-    if(tileClasses.includes("border")){
+    if (tileClasses.includes("border")) {
         return true;
     }
-    else{
+    else {
 
         return false;
     }
 
 }
 
-function resetPos(){
+function resetPos() {
     document.getElementsByClassName("charPos")[0].classList.remove("charPos");
     updatePos(document.getElementsByClassName("tile")[77]);
 }
 
-function normalMove(posTile){
-        setMovementOption("up", posTile);
-        setMovementOption("down", posTile);
-        setMovementOption("left", posTile);
-        setMovementOption("right", posTile);
+function normalMove(posTile) {
+    setMovementOption("up", posTile);
+    setMovementOption("down", posTile);
+    setMovementOption("left", posTile);
+    setMovementOption("right", posTile);
 
 }
 
 //Setting the bounds for grid so that user cannot move outside of the bounds
-function setUpperBounds(){
+function setUpperBounds() {
     const topRow = document.getElementById("rowOne").children;
 
-    for(const tile of topRow){
+    for (const tile of topRow) {
         tile.classList.add("topBound");
         tile.classList.add("border");
     }
 }
 
-function setLowerBouunds(){
+function setLowerBouunds() {
     const bottonRow = document.getElementById("rowTwelve").children;
 
-    for(const tile of bottonRow){
+    for (const tile of bottonRow) {
         tile.classList.add("lowerBound");
         tile.classList.add("border");
 
     }
 }
 
-function setLeftBounds(){
+function setLeftBounds() {
     const rows = document.getElementById("grid").children;
 
-    for(const row of rows){
+    for (const row of rows) {
         row.children[0].classList.add("leftBound");
         row.children[0].classList.add("border");
 
     }
 }
-function setRightBouunds(){
+function setRightBouunds() {
     const rows = document.getElementById("grid").children;
 
-    for(const row of rows){
+    for (const row of rows) {
         row.children[rows.length - 1].classList.add("rightBound");
         row.children[rows.length - 1].classList.add("border");
 
     }
 }
 
-function setMovementOption(moveOption, posTile){
-    switch(moveOption){
+function setMovementOption(moveOption, posTile) {
+    switch (moveOption) {
         case 'up':
             upPos = document.getElementById((posTile - 12).toString());
-            upPos.classList.add("up");  
+            upPos.classList.add("up");
             break;
         case 'down':
             downPos = document.getElementById((posTile + 12).toString());
             downPos.classList.add("down");
             break;
         case 'left':
-            leftPos = document.getElementById((posTile -1).toString());
+            leftPos = document.getElementById((posTile - 1).toString());
             leftPos.classList.add("left");
             break;
         case 'right':
@@ -224,87 +224,87 @@ function setMovementOption(moveOption, posTile){
     }
 }
 
-function isLeftBound(pos){
+function isLeftBound(pos) {
     const classes = Array.from(pos.classList);
-    if(classes.includes("leftBound"))
+    if (classes.includes("leftBound"))
         return true;
     return false;
 }
 
-function isRightBound(pos){
+function isRightBound(pos) {
     const classes = Array.from(pos.classList);
-    if(classes.includes("rightBound"))
+    if (classes.includes("rightBound"))
         return true;
     return false;
 }
 
-function move(e){
+function move(e) {
 
-    if(!["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.key)){
+    if (!["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.key)) {
 
     }
-    else{
-    document.getElementsByClassName("charPos")[0].classList.remove("charPos");
-    upPos.classList.remove("up");
-    downPos.classList.remove("down");
-    leftPos.classList.remove("left");
-    rightPos.classList.remove("right");
+    else {
+        document.getElementsByClassName("charPos")[0].classList.remove("charPos");
+        upPos.classList.remove("up");
+        downPos.classList.remove("down");
+        leftPos.classList.remove("left");
+        rightPos.classList.remove("right");
 
-    if(e.key === "ArrowUp"){
-        moveUp();
-        writeToMsgLog("You pressed up!");
-    }
-    if(e.key === "ArrowDown"){
-        moveDown();
-        writeToMsgLog("You pressed down!");
-    }
-    if(e.key === "ArrowLeft"){
-        moveLeft();
-        writeToMsgLog("You pressed left!");
-    }
-    if(e.key === "ArrowRight"){
-        moveRight();
-        writeToMsgLog("You pressed right!");
-    }
+        if (e.key === "ArrowUp") {
+            moveUp();
+            writeToMsgLog("You pressed up!");
+        }
+        if (e.key === "ArrowDown") {
+            moveDown();
+            writeToMsgLog("You pressed down!");
+        }
+        if (e.key === "ArrowLeft") {
+            moveLeft();
+            writeToMsgLog("You pressed left!");
+        }
+        if (e.key === "ArrowRight") {
+            moveRight();
+            writeToMsgLog("You pressed right!");
+        }
     }
 }
 
-function moveUp(){
-    if(character.getUpperBound){
+function moveUp() {
+    if (character.getUpperBound) {
         updatePos(character.pos);
     }
-    else{
-    updatePos(upPos);
+    else {
+        updatePos(upPos);
     }
 }
-function moveDown(){
-    if(character.getLowerBound){
+function moveDown() {
+    if (character.getLowerBound) {
         updatePos(character.pos);
     }
-    else{
-    updatePos(downPos);
+    else {
+        updatePos(downPos);
     }
 }
-function moveLeft(){
-    if(character.getLeftBound){
+function moveLeft() {
+    if (character.getLeftBound) {
         updatePos(character.pos);
     }
-    else{
-    updatePos(leftPos);
+    else {
+        updatePos(leftPos);
     }
 }
-function moveRight(){
-    if(character.getRightBound){
+function moveRight() {
+    if (character.getRightBound) {
         updatePos(character.pos);
     }
-    else{
-    updatePos(rightPos);
+    else {
+        updatePos(rightPos);
     }
 }
 
 //This writes a message to the message log for the user to see
-function writeToMsgLog(message){
-     const msgLog = document.getElementById("messageLog");
+function writeToMsgLog(message) {
+    const msgLog = document.getElementById("messageLog");
     // const msg = document.createElement("p");
 
     // msg.innerHTML = message;
@@ -314,7 +314,7 @@ function writeToMsgLog(message){
 }
 
 //This function writes the tile numbers the user can move to from there current position
-function writeToMovementOptions(moveOptions){
+function writeToMovementOptions(moveOptions) {
 
     const upMove = document.getElementById("upMove");
     upMove.innerHTML = moveOptions.upMove;
@@ -326,46 +326,46 @@ function writeToMovementOptions(moveOptions){
     rightMove.innerHTML = moveOptions.rightMove;
 
 }
-function writeMoveStatuses(moveStatus){
+function writeMoveStatuses(moveStatus) {
 
     const upMove = document.getElementById("upStatus");
     upMove.innerHTML = moveStatus.up;
     const downMove = document.getElementById("downStatus");
     downMove.innerHTML = moveStatus.down;
     const leftMove = document.getElementById("leftStatus");
-    leftMove.innerHTML =moveStatus.left;
+    leftMove.innerHTML = moveStatus.left;
     const rightMove = document.getElementById("rightStatus");
     rightMove.innerHTML = moveStatus.right;
 
 }
 
-function highLightKey(e){
-    if(!["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.key)){
+function highLightKey(e) {
+    if (!["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.key)) {
 
     }
-    else{
+    else {
 
-    if(e.key === "ArrowUp"){
-        document.getElementById("upKey").classList.add("pressed");
+        if (e.key === "ArrowUp") {
+            document.getElementById("upKey").classList.add("pressed");
 
-    }
-    if(e.key === "ArrowDown"){
-        document.getElementById("downKey").classList.add("pressed");
-    }
-    if(e.key === "ArrowLeft"){
-        document.getElementById("leftKey").classList.add("pressed");
-    }
-    if(e.key === "ArrowRight"){
-        document.getElementById("rightKey").classList.add("pressed");
-    }
+        }
+        if (e.key === "ArrowDown") {
+            document.getElementById("downKey").classList.add("pressed");
+        }
+        if (e.key === "ArrowLeft") {
+            document.getElementById("leftKey").classList.add("pressed");
+        }
+        if (e.key === "ArrowRight") {
+            document.getElementById("rightKey").classList.add("pressed");
+        }
     }
 }
 
-function clearKey(){
+function clearKey() {
 
     const pressedKeys = document.getElementsByClassName("pressed");
 
-    for(pressedKey of pressedKeys){
+    for (pressedKey of pressedKeys) {
         pressedKey.classList.remove("pressed");
 
     }
