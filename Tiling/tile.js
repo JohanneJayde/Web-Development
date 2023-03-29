@@ -97,6 +97,9 @@ function updatePos(pos){
 }
 
 document.addEventListener("keydown", move);
+document.addEventListener("keydown", highLightKey);
+document.addEventListener("keyup", clearKey);
+
 
 document.getElementById("reset").addEventListener("click", resetPos);
 
@@ -334,6 +337,33 @@ function writeMoveStatuses(moveStatus){
     const rightMove = document.getElementById("rightStatus");
     rightMove.innerHTML = moveStatus.right;
 
+}
+
+function highLightKey(e){
+    if(!["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.key)){
+
+    }
+    else{
+
+    if(e.key === "ArrowUp"){
+        document.getElementById("upKey").classList.add("pressed");
+
+    }
+    if(e.key === "ArrowDown"){
+        document.getElementById("downKey").classList.add("pressed");
+    }
+    if(e.key === "ArrowLeft"){
+        document.getElementById("leftKey").classList.add("pressed");
+    }
+    if(e.key === "ArrowRight"){
+        document.getElementById("rightKey").classList.add("pressed");
+    }
+    }
+}
+
+function clearKey(){
+
+    document.getElementsByClassName("pressed")[0].classList.remove("pressed");
 }
 
 /*
