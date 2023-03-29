@@ -3,18 +3,67 @@ const tiles = document.getElementsByClassName("tile");
 
 
 class CharacterPiece{
+
     constructor(pos){
         this.pos = pos;
         this.bounds = {right: false, left: false, up: false, down: false}
+        this.moves = {
+            upMove: Number(pos.id) - 12,
+            downMove:  Number(pos.id) + 12,
+            leftMove: Number(pos.id) -1,
+            rigthMove: Number(pos.id) + 1
+        };
     }
+    enableMove(bound){
+        switch(bound){
+            case 'up':
+                this.bounds.up = true;
+                break;
+            case 'down':
+                this.bounds.down = true;
+                break;
+            case 'left':
+                this.bounds.down = true;
+                break;
+            case 'right':
+                this.bounds.down = true;
+                break;
+        }
+    }
+    disableMove(bound){
+        switch(bound){
+            case 'up':
+                this.bounds.up = false;
+                break;
+            case 'down':
+                this.bounds.down = false;
+                break;
+            case 'left':
+                this.bounds.down = false;
+                break;
+            case 'right':
+                this.bounds.down = false;
+                break;
+        }
+    }
+    get getUpperBound(){
+        return this.bounds.up;
+    }
+    get getLowerBound(){
+        return this.bounds.down;
+    }
+    get getleftBound(){
+        return this.bounds.left;
+    }
+    get getRightBound(){
+        return this.bounds.right;
+    }
+
 }
 
-const character = new CharacterPiece(document.getElementsByClassName("tile")[17]);
+const character = new CharacterPiece(document.getElementsByClassName("tile")[77]);
 
-let upPos = null;
-let downPos = null;
-let leftPos = null;
-let rightPos = null;
+
 
 updatePos(character.pos);
 setUpperBounds();
@@ -37,23 +86,12 @@ function resetPos(){
 }
 
 function normalMove(posTile){
-    if(checkOutOfBounds(document.getElementById((posTile - 12).toString()))){}
-    else{
-        setMovementOption("up", posTile);
-    }
-    if(checkOutOfBounds(document.getElementById((posTile + 12).toString()))){}
-    else{
-        setMovementOption("down", posTile);
-    }
-    if(checkOutOfBounds(document.getElementById((posTile -1).toString())) || isLeftBound(document.getElementById(posTile))){}
 
-    else{
+        setMovementOption("up", posTile);
+        setMovementOption("down", posTile);
         setMovementOption("left", posTile);
-    }
-    if(checkOutOfBounds(document.getElementById((posTile + 1).toString())) || isRightBound(document.getElementById(posTile))){}
-    else{
         setMovementOption("right", posTile);
-    }    
+
 }
 
 //Setting the bounds for grid so that user cannot move outside of the bounds
@@ -62,14 +100,17 @@ function setUpperBounds(){
 
     for(const tile of topRow){
         tile.classList.add("topBound");
+        tile.classList.add("border");
     }
 }
 
 function setLowerBouunds(){
-    const bottonRow = document.getElementById("rowFive").children;
+    const bottonRow = document.getElementById("rowTwelve").children;
 
     for(const tile of bottonRow){
         tile.classList.add("lowerBound");
+        tile.classList.add("border");
+
     }
 }
 
@@ -78,13 +119,17 @@ function setLeftBounds(){
 
     for(const row of rows){
         row.children[0].classList.add("leftBound");
+        row.children[0].classList.add("border");
+
     }
 }
 function setRightBouunds(){
     const rows = document.getElementById("grid").children;
 
     for(const row of rows){
-        row.children[4].classList.add("rightBound");
+        row.children[rows.length - 1].classList.add("rightBound");
+        row.children[rows.length - 1].classList.add("border");
+
     }
 }
 
@@ -111,7 +156,7 @@ function setMovementOption(moveOption, posTile){
 
 function checkOutOfBounds(pos){
 
-    if(pos === null)
+    if(Array.from(pos.classList).includes("border"))
         return true;
 
     return false;
@@ -137,7 +182,7 @@ function move(e){
     downPos.classList.remove("down");
     leftPos.classList.remove("left");
     rightPos.classList.remove("right");
-    
+
     if(e.key === "ArrowUp"){
         moveUp();
         writeToMsgLog("You pressed up!");
