@@ -37,11 +37,11 @@ function resetPos(){
 }
 
 function normalMove(posTile){
-    if(checkOutOfBounds(document.getElementById((posTile - 5).toString()))){}
+    if(checkOutOfBounds(document.getElementById((posTile - 12).toString()))){}
     else{
         setMovementOption("up", posTile);
     }
-    if(checkOutOfBounds(document.getElementById((posTile + 5).toString()))){}
+    if(checkOutOfBounds(document.getElementById((posTile + 12).toString()))){}
     else{
         setMovementOption("down", posTile);
     }
@@ -91,11 +91,11 @@ function setRightBouunds(){
 function setMovementOption(moveOption, posTile){
     switch(moveOption){
         case 'up':
-            upPos = document.getElementById((posTile - 5).toString());
+            upPos = document.getElementById((posTile - 12).toString());
             upPos.classList.add("up");  
             break;
         case 'down':
-            downPos = document.getElementById((posTile + 5).toString());
+            downPos = document.getElementById((posTile + 12).toString());
             downPos.classList.add("down");
             break;
         case 'left':
