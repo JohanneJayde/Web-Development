@@ -111,7 +111,7 @@ body{
 
 }
 
-#pressed{
+.pressed{
     background-color: black;
     color: white;
 }
