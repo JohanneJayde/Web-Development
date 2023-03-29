@@ -267,18 +267,36 @@ function move(e){
 }
 
 function moveUp(){
+    if(character.getUpperBound){
+        updatePos(character.pos);
+    }
+    else{
     updatePos(upPos);
+    }
 }
 function moveDown(){
+    if(character.getLowerBound){
+        updatePos(character.pos);
+    }
+    else{
     updatePos(downPos);
-
+    }
 }
 function moveLeft(){
+    if(character.getLeftBound){
+        updatePos(character.pos);
+    }
+    else{
     updatePos(leftPos);
-
+    }
 }
 function moveRight(){
+    if(character.getRightBound){
+        updatePos(character.pos);
+    }
+    else{
     updatePos(rightPos);
+    }
 }
 
 //This writes a message to the message log for the user to see
