@@ -1,12 +1,11 @@
 
 const tiles = document.getElementsByClassName("tile");
 
-
 class CharacterPiece{
 
     constructor(pos){
         this.pos = pos;
-        this.bounds = {right: false, left: false, up: false, down: false}
+        this.bounds = {right: true, left: true, up: true, down: true}
         this.moves = {
             upMove: Number(pos.id) - 12,
             downMove:  Number(pos.id) + 12,
@@ -78,8 +77,6 @@ class CharacterPiece{
 
 const character = new CharacterPiece(document.getElementsByClassName("tile")[77]);
 
-
-
 updatePos(character.pos);
 setUpperBounds();
 setLowerBouunds();
@@ -87,10 +84,12 @@ setLeftBounds();
 setRightBouunds()
 
 function updatePos(pos){
+
     pos.classList.add("charPos");
     character.updatePos(pos);
     const posTile = Number(pos.id);
     writeToMovementOptions(character.getMoveOptions);
+    writeMoveStatuses(character.bounds);
     normalMove(posTile);
     
 }
@@ -99,13 +98,61 @@ document.addEventListener("keydown", move);
 
 document.getElementById("reset").addEventListener("click", resetPos);
 
+function updateMoveStatus(){
+    const moveOptions = character.moves;
+
+    if(isBorder(moveOptions.upMove)){
+        character.disableMove("up");
+    }
+    else{
+        character.enableMove("up");
+
+    }
+    if(isBorder(moveOptions.downMove)){
+        character.disableMove("down");
+
+    }
+    else{
+        character.enableMove("down");
+    }
+    if(isBorder(moveOptions.leftMove)){
+        character.disableMove("left");
+
+    }
+    else{
+        character.enableMove("left")
+    }
+    if(isBorder(moveOptions.rightMove)){
+        character.disableMove("right");
+
+    }
+    else{
+        character.enableMove("right");
+    }
+
+}
+
+function isBorder(tile){
+    const tileClasses = Array.from(document.getElementById(tile.toString()).classList);
+
+    if(tileClasses.includes("border")){
+        alert(tile + " is a border!");
+        return true;
+    }
+    else{
+
+        return false;
+    }
+
+}
+
 function resetPos(){
     document.getElementsByClassName("charPos")[0].classList.remove("charPos");
-
     updatePos(document.getElementsByClassName("tile")[77]);
 }
 
 function normalMove(posTile){
+    updateMoveStatus();
 
         setMovementOption("up", posTile);
         setMovementOption("down", posTile);
@@ -262,6 +309,18 @@ function writeToMovementOptions(moveOptions){
     leftMove.innerHTML = moveOptions.leftMove;
     const rightMove = document.getElementById("rightMove");
     rightMove.innerHTML = moveOptions.rightMove;
+
+}
+function writeMoveStatuses(moveStatus){
+
+    const upMove = document.getElementById("upStatus");
+    upMove.innerHTML = moveStatus.up;
+    const downMove = document.getElementById("downStatus");
+    downMove.innerHTML = moveStatus.down;
+    const leftMove = document.getElementById("leftStatus");
+    leftMove.innerHTML = moveStatus.left;
+    const rightMove = document.getElementById("rightStatus");
+    rightMove.innerHTML = moveStatus.right;
 
 }
 
