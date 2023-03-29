@@ -36,7 +36,7 @@ body {
 }
 
 .messageLog {
-    height: 150px;
+    height: 100px;
     width: 700px;
     font-size: 50px;
     background-color: white;
@@ -116,4 +116,16 @@ body {
 .pressed {
     background-color: black;
     color: white;
+}
+
+button{
+    background-color: salmon;
+    color: white;
+    height: 50px;
+    border: solid 1px silver;
+}
+button:hover{
+    border: solid 1px black;
+    color: black;
+
 }
