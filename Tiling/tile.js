@@ -301,11 +301,13 @@ function moveRight(){
 
 //This writes a message to the message log for the user to see
 function writeToMsgLog(message){
-    const msgLog = document.getElementById("messageLog");
-    const msg = document.createElement("p");
+     const msgLog = document.getElementById("messageLog");
+    // const msg = document.createElement("p");
 
-    msg.innerHTML = message;
-    msgLog.append(msg);
+    // msg.innerHTML = message;
+    // msgLog.append(msg);
+
+    msgLog.innerHTML = message;
 }
 
 //This function writes the tile numbers the user can move to from there current position
@@ -324,13 +326,13 @@ function writeToMovementOptions(moveOptions){
 function writeMoveStatuses(moveStatus){
 
     const upMove = document.getElementById("upStatus");
-    upMove.innerHTML = "UP: " + moveStatus.up;
+    upMove.innerHTML = moveStatus.up;
     const downMove = document.getElementById("downStatus");
-    downMove.innerHTML = "DOWN: " + moveStatus.down;
+    downMove.innerHTML = moveStatus.down;
     const leftMove = document.getElementById("leftStatus");
-    leftMove.innerHTML = "LEFT: " + moveStatus.left;
+    leftMove.innerHTML =moveStatus.left;
     const rightMove = document.getElementById("rightStatus");
-    rightMove.innerHTML = "RIGHT: " + moveStatus.right;
+    rightMove.innerHTML = moveStatus.right;
 
 }
 

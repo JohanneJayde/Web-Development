@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
 #game{
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -5,11 +7,13 @@
 }
 
 .tile{
-    width: 50px;
-    height: 50px;
-    background-color: blue;
+    font-family: "lato";
+    width: 75px;
+    height: 75px;
+    background-color: Silver
+    ;
     border: solid 1px white;
-    color: white;
+    color: White;
 }
 
 .row{
@@ -23,23 +27,18 @@
 
 }
 
-.tile:focus{
-    background-color: greenyellow;
-}
-
 .charPos{
     border: solid 1px pink;
-    background-color: white;
+    background-color: #737CA1;
 }
 
 .messageLog{
-    height: 100%;
+    height: 150px;
     width: 700px;
-    font-size: 3px;
+    font-size: 50px;
     background-color: white;
     border: solid 3px grey;
-    overflow: hidden;
-    overflow-y:scroll;
+
 }
 
 #grid{
@@ -48,7 +47,7 @@
     flex-wrap: wrap;
     width: 320px;
     height: 320px;
-    background-color: yellow;
+
 }
 
 .border{
@@ -59,29 +58,37 @@
 #info{
     height: 100%;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 3em;
 }
 #movementOptions{
     width: 100%;
-    height: 100px;
-    background-color: pink;
+    height: 300px;
+    background-color: salmon;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+    align-items: center;
 }
 
 #movementStatus{
     width: 100%;
-    height: 100px;
-    background-color: pink;
+    height: 300px;
+    background-color: salmon;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+    align-items: center;
+
 }
 
 .moveOption{
-    border: solid 2px cyan;
+    font-family: "lato";
+    border: solid 2px #737CA1;
     width: 100px;
     height: 100px;
+    font-size: 25px;
     background-color: white;
 }
 
