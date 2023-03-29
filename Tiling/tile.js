@@ -363,7 +363,13 @@ function highLightKey(e){
 
 function clearKey(){
 
-    document.getElementsByClassName("pressed")[0].classList.remove("pressed");
+    const pressedKeys = document.getElementsByClassName("pressed");
+
+    for(pressedKey of pressedKeys){
+        pressedKey.classList.remove("pressed");
+
+    }
+
 }
 
 /*
