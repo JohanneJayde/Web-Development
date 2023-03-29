@@ -11,7 +11,7 @@ class CharacterPiece{
             upMove: Number(pos.id) - 12,
             downMove:  Number(pos.id) + 12,
             leftMove: Number(pos.id) -1,
-            rigthMove: Number(pos.id) + 1
+            rightMove: Number(pos.id) + 1
         };
     }
     enableMove(bound){
@@ -46,6 +46,18 @@ class CharacterPiece{
                 break;
         }
     }
+    updateMoves(pos){
+        this.moves = {
+            upMove: Number(pos.id) - 12,
+            downMove:  Number(pos.id) + 12,
+            leftMove: Number(pos.id) -1,
+            rightMove: Number(pos.id) + 1
+        };
+    }
+    updatePos(pos){
+        this.pos = pos;
+        this.updateMoves(pos);
+    }
     get getUpperBound(){
         return this.bounds.up;
     }
@@ -57,6 +69,9 @@ class CharacterPiece{
     }
     get getRightBound(){
         return this.bounds.right;
+    }
+    get getMoveOptions(){
+        return this.moves;
     }
 
 }
@@ -73,8 +88,9 @@ setRightBouunds()
 
 function updatePos(pos){
     pos.classList.add("charPos");
+    character.updatePos(pos);
     const posTile = Number(pos.id);
-
+    writeToMovementOptions(character.getMoveOptions);
     normalMove(posTile);
     
 }
@@ -222,6 +238,19 @@ function writeToMsgLog(message){
 
     msg.innerHTML = message;
     msgLog.append(msg);
+}
+
+function writeToMovementOptions(moveOptions){
+
+    const upMove = document.getElementById("upMove");
+    upMove.innerHTML = moveOptions.upMove;
+    const downMove = document.getElementById("downMove");
+    downMove.innerHTML = moveOptions.downMove;
+    const leftMove = document.getElementById("leftMove");
+    leftMove.innerHTML = moveOptions.leftMove;
+    const rightMove = document.getElementById("rightMove");
+    rightMove.innerHTML = moveOptions.rightMove;
+
 }
 
 /*

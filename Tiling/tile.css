@@ -56,3 +56,22 @@
     color: salmon;
     border: solid 1px silver;
 }
+#info{
+    height: 100%;
+    width: 100%;
+}
+#movementOptions{
+    width: 100%;
+    height: 100px;
+    background-color: pink;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.moveOption{
+    border: solid 2px cyan;
+    width: 100px;
+    height: 100px;
+    background-color: white;
+}
