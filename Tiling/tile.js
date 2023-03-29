@@ -197,6 +197,11 @@ function isRightBound(pos){
 }
 
 function move(e){
+
+    if(!["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.key)){
+
+    }
+    else{
     document.getElementsByClassName("charPos")[0].classList.remove("charPos");
     upPos.classList.remove("up");
     downPos.classList.remove("down");
@@ -218,6 +223,7 @@ function move(e){
     if(e.key === "ArrowRight"){
         moveRight();
         writeToMsgLog("You pressed right!");
+    }
     }
 }
 
