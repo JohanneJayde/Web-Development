@@ -97,8 +97,12 @@ function updatePos(pos){
 
 document.addEventListener("keydown", move);
 
-function resetPos(){
+document.getElementById("reset").addEventListener("click", resetPos);
 
+function resetPos(){
+    document.getElementsByClassName("charPos")[0].classList.remove("charPos");
+
+    updatePos(document.getElementsByClassName("tile")[77]);
 }
 
 function normalMove(posTile){
@@ -232,6 +236,7 @@ function moveRight(){
     updatePos(rightPos);
 }
 
+//This writes a message to the message log for the user to see
 function writeToMsgLog(message){
     const msgLog = document.getElementById("messageLog");
     const msg = document.createElement("p");
@@ -240,6 +245,7 @@ function writeToMsgLog(message){
     msgLog.append(msg);
 }
 
+//This function writes the tile numbers the user can move to from there current position
 function writeToMovementOptions(moveOptions){
 
     const upMove = document.getElementById("upMove");
