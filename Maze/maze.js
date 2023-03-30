@@ -75,13 +75,26 @@ class CharacterPiece {
 
 }
 
+const key = ["15", "27", "28", "93", "101", "118", "103","105","106","128"];
+
 const character = new CharacterPiece(document.getElementsByClassName("tile")[77]);
 
 updatePos(character.pos);
 setUpperBounds();
 setLowerBouunds();
 setLeftBounds();
-setRightBouunds()
+setRightBouunds();
+generateMaze(key);
+function generateMaze(key){
+    
+    for(const tile of tiles){
+
+        if(key.includes(tile.id)){
+            tile.classList.add("border");
+        }
+    }
+
+}
 
 function updatePos(pos) {
 
@@ -400,3 +413,4 @@ Laymens terms
 
 */
 
+//export {setLeftBounds, setRightBouunds, setUpperBounds, setLowerBouunds};
