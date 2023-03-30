@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+#game {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+}
+
+body {
+    font-family: "lato";
+}
+
+.tile {
+    font-family: "lato";
+    width: 75px;
+    height: 75px;
+    background-color: Silver;
+    border: solid 1px white;
+    color: White;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+#grid {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.charPos {
+    border: solid 1px pink;
+    background-color: #737CA1;
+}
+
+.messageLog {
+    height: 100px;
+    width: 700px;
+    font-size: 50px;
+    background-color: white;
+    border: solid 3px grey;
+
+}
+
+#grid {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 320px;
+    height: 320px;
+
+}
+
+.border {
+    background-color: salmon;
+    color: salmon;
+    border: solid 1px silver;
+}
+
+#info {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 3em;
+}
+
+#movementOptions {
+    width: 100%;
+    height: 200px;
+    background-color: salmon;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#movementStatus {
+    width: 100%;
+    height: 200px;
+    background-color: salmon;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+
+}
+
+.moveOption {
+    font-family: "lato";
+    border: solid 2px #737CA1;
+    width: 100px;
+    height: 100px;
+    font-size: 25px;
+    background-color: white;
+}
+
+.key {
+    height: 50px;
+    width: 50px;
+    border: solid 2px black;
+    background-color: white;
+    font-size: 25px;
+    ;
+    color: black;
+}
+
+#keypad {
+    display: flex;
+    flex-direction: row;
+
+}
+
+.pressed {
+    background-color: black;
+    color: white;
+}
+
+button{
+    background-color: salmon;
+    color: white;
+    height: 50px;
+    border: solid 1px silver;
+}
+button:hover{
+    border: solid 1px black;
+    color: black;
+
+}
