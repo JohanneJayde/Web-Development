@@ -104,7 +104,7 @@ function updatePos(pos) {
 
     const posTile = Number(pos.id);
     writeToMovementOptions(character.getMoveOptions);
-    writeMoveStatuses(character.bounds);
+  //  writeMoveStatuses(character.bounds);
     normalMove(posTile);
 
 }

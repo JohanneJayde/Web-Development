@@ -54,9 +54,16 @@ for(tile of tiles){
 
 
 function addBorder(e){
+
+    if(Array.from(e.target.classList).includes("border")){
+
+    }
+    else{
     e.target.classList.add("border");
     console.log(e.target.id);
     mazeKey.push(e.target.id);
+    writeMaze(e.target.id);
+    }
 }
 
 function generateMaze(key){
@@ -69,5 +76,15 @@ function generateMaze(key){
 
         }
     }
+
+}
+function writeMaze(mazeTile){
+  
+            const msgLog = document.getElementById("mazeKey");
+
+             msgLog.innerHTML += mazeTile + ", ";
+        
+
+
 
 }
