@@ -54,8 +54,8 @@ body {
 }
 
 .border {
-    background-color: salmon;
-    color: salmon;
+    background-color: #5DADE2;
+    color: #5DADE2;
     border: solid 1px silver;
 }
 
@@ -70,7 +70,7 @@ body {
 #movementOptions {
     width: 100%;
     height: 200px;
-    background-color: salmon;
+    background-color: #5DADE2;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
@@ -80,7 +80,7 @@ body {
 #movementStatus {
     width: 100%;
     height: 200px;
-    background-color: salmon;
+    background-color: #5DADE2;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
@@ -119,7 +119,7 @@ body {
 }
 
 button{
-    background-color: salmon;
+    background-color: #5DADE2;
     color: white;
     height: 50px;
     border: solid 1px silver;

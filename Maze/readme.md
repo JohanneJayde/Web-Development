@@ -1,2 +1,1 @@
-This is a project I started during Spring Break 2023. The goal is to create a robust tiling system that allows for a user to input arrow keys to move a "character" around the tiles.
-The project was originally going to be a maze but I have since decided that I will create seperate projects and alter this template for each use case. As of now, the user can move around the tiles and cannot move onto "borders" and will instead just collide with them.
+This is a deviation from the tile project done. This project is meant to be a maze where a user can navigate and solve a maze. I also want to add a way for you to supply a "key" that will create a maze if supplied, making it so multiple mazes possible. 
