@@ -399,12 +399,32 @@ function clearKey() {
 
 }
 
-document.getElementById("editBtn").addEventListener("click", displayEditMenu);
-document.getElementById("editBtn").addEventListener("click", convertTilesEditable);
+document.getElementById("editBtn").addEventListener("click", showEditorView);
+
+
+function showEditorView(){
+    displayEditMenu();
+    convertTilesEditable();
+    hidePlayableInfo();
+}
+
+function returnToPlayableView(){
+    hideEditMenu();
+    showPlayableInfo();
+}
+
+function showPlayableInfo(){
+    document.getElementById("playableInfo").style.display = "inline";
+}
+
+function hidePlayableInfo(){
+    document.getElementById("playableInfo").style.display = "none";
+}
+
 
 function displayEditMenu(){
     document.getElementById("editMaze").style.visibility = "visible";
-document.getElementById("saveMazeBtn").addEventListener("click", hideEditMenu);
+    document.getElementById("saveMazeBtn").addEventListener("click", returnToPlayableView);
 
 }
 
@@ -463,6 +483,12 @@ function writeMaze(mazeTile){
 function placeStartPos(){
 
 }
+
+
+/*
+Bug: after maze has been updated, you need to make sure that the character position is in a valid location afterward such that it can move still or update the bounds of character so it can't move onto newly based borders
+*/
+
 
 /*
 Process to do Maze Game:
