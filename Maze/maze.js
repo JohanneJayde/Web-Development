@@ -557,6 +557,8 @@ function beamMode(){
     toggleBeamMode(placeBeamBtn);
     cementTiles();
     document.getElementById("grid").addEventListener("click", findBeam);
+   // document.getElementById("grid").addEventListener("mouseover", prepareBeam);
+
 }
 
 function findBeam(e){
@@ -566,34 +568,40 @@ function findBeam(e){
     }
 
     const tileNum = Number((e.target.id % 12) - 1);
-    placeBeam(row, tileNum);
+    calculateBeam(row, tileNum);
 
 }
 
-function placeBeam(row, tileNum){
+function calculateBeam(row, tileNum){
     const beamParts = row.children;
-
+    let realBeamParts = [];
     for(i = tileNum; i < beamParts.length; i++){
         if(isSpecialTile(beamParts[i])){
             break;
         }
         else{
-        addBeamPart(beamParts[i]);
+            realBeamParts.push(beamParts[i]);
 
+        }
     }
+    createBeam(realBeamParts);
+
+}
+
+function createBeam(beamParts){
+
+    for(part of beamParts){
+        part.classList.add("wall");
+        mazeKey.push(tile.id);
     }
     updatePos(character.pos);
     document.getElementById("grid").removeEventListener("click", findBeam);
     toggleBeamMode(placeBeamBtn);
-
-
 }
 
-function addBeamPart(tile){
-    tile.classList.add("wall");
-    mazeKey.push(tile.id);
-
-
+function prepareBeam(tile){
+    alert(tile.target.id);
+    tile.target.style.backgroundColor = "var(--main-border-color)";
 }
 
 function isSpecialTile(tile){
@@ -606,6 +614,8 @@ function isSpecialTile(tile){
 function toggleBeamMode(btn){
     if(inBeamMode){
         btn.style.backgroundColor = "var(--main-border-color)";
+        inBeamMode = false;
+
 
     }else{
         btn.style.backgroundColor = "yellow";
