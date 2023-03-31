@@ -559,16 +559,21 @@ function beamMode(){
 
 function findBeam(e){
     const row = e.target.parentNode;
+    if(isSpecialTile(e.target)){
+        return;
+    }
+
     const tileNum = Number((e.target.id % 12) - 1);
     placeBeam(row, tileNum);
-    
+
 }
 
 function placeBeam(row, tileNum){
     const beamParts = row.children;
 
     for(i = tileNum; i < beamParts.length; i++){
-        if(isBorder(beamParts[i]) || isBound(beamParts[i]) || character.pos === beamParts[i]){
+        if(isSpecialTile(beamParts[i])){
+            break;
         }
         else{
         addBeamPart(beamParts[i]);
@@ -583,6 +588,13 @@ function placeBeam(row, tileNum){
 function addBeamPart(tile){
     tile.classList.add("wall");
 
+}
+
+function isSpecialTile(tile){
+    if(isBorder(tile) || isBound(tile) || character.pos === tile){
+        return true;
+    }
+        return false;
 }
 
 /*
