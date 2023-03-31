@@ -449,6 +449,8 @@ function hidePlayableInfo(){
 function displayEditMenu(){
     document.getElementById("editMaze").style.visibility = "visible";
     document.getElementById("saveMazeBtn").addEventListener("click", returnToPlayableView);
+    document.getElementById("placeStartBtn").addEventListener("click", placeStartPos);
+
 
 }
 
@@ -482,6 +484,7 @@ function addBorder(e){
     console.log(e.target.id);
     mazeKey.push(e.target.id);
     writeMaze(e.target.id);
+    updatePos(character.pos);
     }
 }
 
@@ -505,6 +508,23 @@ function writeMaze(mazeTile){
 
 
 function placeStartPos(){
+    document.getElementsByClassName("charPos")[0].classList.remove("charPos");
+    document.getElementById("grid").addEventListener("click", setStart)
+
+
+}
+
+function setStart(e){
+
+    if(isBorder(e.target.id.toString())){
+        e.target.classList.remove("border");
+    }
+
+    e.target.classList.add("charPos");
+
+    updatePos(e.target)
+
+    document.getElementById("grid").removeEventListener("click", setStart);
 
 }
 
