@@ -551,7 +551,7 @@ function isBound(tile) {
 
 const placedHoriBeams = document.getElementById("placeHoriBeamsBtn");
 const placedVertBeams = document.getElementById("placeVertBeamsBtn");
-//placedVertBeams.addEventListener("click", beamVertMode);
+placedVertBeams.addEventListener("click", beamVertMode);
 placedHoriBeams.addEventListener("click", beamMode);
 
 const $tiles =  $("#grid").children().children();
@@ -571,7 +571,7 @@ function beamVertMode() {
     cementTiles();
     $tiles.mouseenter(findVertBeams);
     $tiles.mouseleave(removeBeam);
-    //$tiles.click(createBeam);
+    $tiles.click(createBeam);
 
 }
 
@@ -585,15 +585,36 @@ function removeBeam(beamparts) {
 }
 
 function findVertBeams(e){
-    const colNumber = Number((e.target.id % 12) - 1);
+    const startTile = Number(e.target.id);
+    const colNumber = Number((startTile % 12) - 1);
 
-    for(i = 1; i <= tiles.length - 1; i++){
-        if((Number(tiles[i].id % 12) - 1) === colNumber){
-            console.log(tiles[i].id);
+    const colBeamParts = [];
+
+    for(i = startTile; i <= tiles.length - 1; i++){
+  if((Number(tiles[i].id % 12) - 1) === colNumber){
+            colBeamParts.push(tiles[i]);
+        
+    }
+}
+    calculatVertBeam(colBeamParts);
+}
+
+function calculatVertBeam(colParts){
+
+    for(part of colParts){
+        if (isSpecialTile(part)) {
+            break;
+        }
+        else {
+            console.log(part.id);
+            realBeamParts.push(part);
+
         }
     }
-    getVertBeeam();
+    prepareBeam(realBeamParts);
+
 }
+
 
 function findBeam(e) {
     console.log(e.target.id);
