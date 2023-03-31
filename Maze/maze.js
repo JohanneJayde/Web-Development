@@ -587,6 +587,8 @@ function placeBeam(row, tileNum){
 
 function addBeamPart(tile){
     tile.classList.add("wall");
+    mazeKey.push(tile.id);
+
 
 }
 
