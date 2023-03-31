@@ -58,7 +58,7 @@ body {
 
 }
 
-.border {
+.wall {
     background-color: var(--main-border-color);
     color: var(--main-border-color);
     border: solid 1px silver;

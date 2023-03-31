@@ -103,7 +103,7 @@ function generateMaze(key){
     for(const tile of tiles){
 
         if(key.includes(tile.id)){
-            tile.classList.add("border");
+            tile.classList.add("wall");
         }
     }
 
@@ -167,7 +167,7 @@ function updateMoveStatus() {
 function isBorder(tile) {
     const tileClasses = Array.from(document.getElementById(tile.toString()).classList);
 
-    if (tileClasses.includes("border")) {
+    if (tileClasses.includes("wall")) {
         return true;
     }
     else {
@@ -195,8 +195,8 @@ function setUpperBounds() {
     const topRow = document.getElementById("rowOne").children;
 
     for (const tile of topRow) {
-        tile.classList.add("topBound");
         tile.classList.add("border");
+        tile.classList.add("wall");
     }
 }
 
@@ -204,8 +204,8 @@ function setLowerBouunds() {
     const bottonRow = document.getElementById("rowTwelve").children;
 
     for (const tile of bottonRow) {
-        tile.classList.add("lowerBound");
         tile.classList.add("border");
+        tile.classList.add("wall");
 
     }
 }
@@ -214,8 +214,8 @@ function setLeftBounds() {
     const rows = document.getElementById("grid").children;
 
     for (const row of rows) {
-        row.children[0].classList.add("leftBound");
         row.children[0].classList.add("border");
+        row.children[0].classList.add("wall");
 
     }
 }
@@ -223,8 +223,8 @@ function setRightBouunds() {
     const rows = document.getElementById("grid").children;
 
     for (const row of rows) {
-        row.children[rows.length - 1].classList.add("rightBound");
         row.children[rows.length - 1].classList.add("border");
+        row.children[rows.length - 1].classList.add("wall");
 
     }
 }
@@ -252,14 +252,14 @@ function setMovementOption(moveOption, posTile) {
 
 function isLeftBound(pos) {
     const classes = Array.from(pos.classList);
-    if (classes.includes("leftBound"))
+    if (classes.includes("border"))
         return true;
     return false;
 }
 
 function isRightBound(pos) {
     const classes = Array.from(pos.classList);
-    if (classes.includes("rightBound"))
+    if (classes.includes("border"))
         return true;
     return false;
 }
@@ -476,11 +476,11 @@ function cementTiles(){
 
 function addBorder(e){
 
-    if(Array.from(e.target.classList).includes("border")){
+    if(Array.from(e.target.classList).includes("wall")){
 
     }
     else{
-    e.target.classList.add("border");
+    e.target.classList.add("wall");
     console.log(e.target.id);
     mazeKey.push(e.target.id);
     writeMaze(e.target.id);
@@ -493,7 +493,7 @@ function generateMaze(key){
     for(const tile of tiles){
 
         if(key.includes(tile.id)){
-            tile.classList.add("border");
+            tile.classList.add("wall");
  
         }
     }
@@ -522,7 +522,7 @@ function setStart(e){
         document.getElementsByClassName("charPos")[0].classList.remove("charPos");
 
     if(isBorder(e.target.id.toString())){
-        e.target.classList.remove("border");
+        e.target.classList.remove("wall");
     }
 
     e.target.classList.add("charPos");
@@ -536,7 +536,7 @@ function setStart(e){
 function isBound(e){
     const tileClasses = Array.from(e.target.classList);
     for(const tileClass of tileClasses){
-        if(["topBound", "lowerBound", "leftBound", "rightBound"].includes(tileClass)){
+        if(["border", "border", "border", "border"].includes(tileClass)){
             return true;
         }
     }
