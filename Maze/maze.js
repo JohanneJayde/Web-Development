@@ -559,10 +559,9 @@ function beamMode(){
 
 function findBeam(e){
     const row = e.target.parentNode;
-
     const tileNum = Number((e.target.id % 12) - 1);
-
     placeBeam(row, tileNum);
+    
 }
 
 function placeBeam(row, tileNum){
@@ -570,7 +569,6 @@ function placeBeam(row, tileNum){
 
     for(i = tileNum; i < beamParts.length; i++){
         if(isBorder(beamParts[i]) || isBound(beamParts[i]) || character.pos === beamParts[i]){
-            alert("cannot place beam here");
         }
         else{
         addBeamPart(beamParts[i]);
