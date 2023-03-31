@@ -406,6 +406,10 @@ function showEditorView(){
     displayEditMenu();
     convertTilesEditable();
     hidePlayableInfo();
+    swapToEditorColors();
+}
+function swapToEditorColors(){
+    $(":root").css("--main-border-color", "#60FA6B");
 }
 
 function returnToPlayableView(){
