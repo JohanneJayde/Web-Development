@@ -508,13 +508,18 @@ function writeMaze(mazeTile){
 
 
 function placeStartPos(){
-    document.getElementsByClassName("charPos")[0].classList.remove("charPos");
     document.getElementById("grid").addEventListener("click", setStart)
 
 
 }
 
 function setStart(e){
+
+    if(isBound(e)){
+
+    }
+    else{
+        document.getElementsByClassName("charPos")[0].classList.remove("charPos");
 
     if(isBorder(e.target.id.toString())){
         e.target.classList.remove("border");
@@ -525,9 +530,20 @@ function setStart(e){
     updatePos(e.target)
 
     document.getElementById("grid").removeEventListener("click", setStart);
-
+}
 }
 
+function isBound(e){
+    const tileClasses = Array.from(e.target.classList);
+    for(const tileClass of tileClasses){
+        if(["topBound", "lowerBound", "leftBound", "rightBound"].includes(tileClass)){
+            return true;
+        }
+    }
+
+    return false;
+
+}
 
 /*
 Bug: after maze has been updated, you need to make sure that the character position is in a valid location afterward such that it can move still or update the bounds of character so it can't move onto newly based borders
