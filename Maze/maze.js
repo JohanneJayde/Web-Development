@@ -7,13 +7,15 @@ const editMode = false;
 class CharacterPiece {
 
     constructor(pos) {
+        const posNum = Number(pos.id);
+
         this.pos = pos;
         this.bounds = { right: false, left: false, up: false, down: false }
         this.moves = {
-            upMove: Number(pos.id) - 12,
-            downMove: Number(pos.id) + 12,
-            leftMove: Number(pos.id) - 1,
-            rightMove: Number(pos.id) + 1
+            upMove: document.getElementById((posNum - 12).toString()),
+            downMove: document.getElementById((posNum + 12).toString()),
+            leftMove: document.getElementById((posNum - 1).toString()),
+            rightMove: document.getElementById((posNum + 1).toString())
         };
     }
     disableMove(bound) {
@@ -49,11 +51,12 @@ class CharacterPiece {
         }
     }
     updateMoves(pos) {
+        const posNum = Number(pos.id);
         this.moves = {
-            upMove: Number(pos.id) - 12,
-            downMove: Number(pos.id) + 12,
-            leftMove: Number(pos.id) - 1,
-            rightMove: Number(pos.id) + 1
+            upMove: document.getElementById((posNum - 12).toString()),
+            downMove: document.getElementById((posNum + 12).toString()),
+            leftMove: document.getElementById((posNum - 1).toString()),
+            rightMove: document.getElementById((posNum + 1).toString())
         };
     }
     updatePos(pos) {
@@ -165,7 +168,7 @@ function updateMoveStatus() {
 }
 
 function isBorder(tile) {
-    const tileClasses = Array.from(document.getElementById(tile.toString()).classList);
+    const tileClasses = Array.from(tile.classList);
 
     if (tileClasses.includes("wall")) {
         return true;
@@ -343,13 +346,13 @@ function writeToMsgLog(message) {
 function writeToMovementOptions(moveOptions) {
 
     const upMove = document.getElementById("upMove");
-    upMove.innerHTML = moveOptions.upMove;
+    upMove.innerHTML = moveOptions.upMove.id;
     const downMove = document.getElementById("downMove");
-    downMove.innerHTML = moveOptions.downMove;
+    downMove.innerHTML = moveOptions.downMove.id;
     const leftMove = document.getElementById("leftMove");
-    leftMove.innerHTML = moveOptions.leftMove;
+    leftMove.innerHTML = moveOptions.leftMove.id;
     const rightMove = document.getElementById("rightMove");
-    rightMove.innerHTML = moveOptions.rightMove;
+    rightMove.innerHTML = moveOptions.rightMove.id;
 
 }
 function writeMoveStatuses(moveStatus) {
@@ -483,7 +486,7 @@ function addBorder(e){
     e.target.classList.add("wall");
     console.log(e.target.id);
     mazeKey.push(e.target.id);
-    writeMaze(e.target.id);
+   // writeMaze(e.target.id);
     updatePos(character.pos);
     }
 }
@@ -508,6 +511,7 @@ function writeMaze(mazeTile){
 
 
 function placeStartPos(){
+    
     document.getElementById("grid").addEventListener("click", setStart)
 
 
@@ -533,15 +537,42 @@ function setStart(e){
 }
 }
 
-function isBound(e){
-    const tileClasses = Array.from(e.target.classList);
+function isBound(tile){
+    const tileClasses = Array.from(tile.classList);
     for(const tileClass of tileClasses){
-        if(["border", "border", "border", "border"].includes(tileClass)){
+        if(tileClass === "border"){
             return true;
         }
     }
 
     return false;
+
+}
+
+document.getElementById("placeBeamsBtn").addEventListener("click", beamMode);
+
+
+function beamMode(){
+    cementTiles();
+    document.getElementById("grid").addEventListener("click", findBeam);
+}
+
+function findBeam(e){
+    const row = e.target.parentNode;
+    placeBeam(row);
+}
+
+function placeBeam(row){
+    const beamParts = row.children;
+
+    for(const part of beamParts){
+        if(isBorder(part) || isBound(part)){
+
+        }
+        else{
+        alert(part.id);
+    }
+    }
 
 }
 
