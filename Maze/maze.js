@@ -556,12 +556,24 @@ placeBeamBtn.addEventListener("click", beamMode);
 function beamMode(){
     toggleBeamMode(placeBeamBtn);
     cementTiles();
-    document.getElementById("grid").addEventListener("click", findBeam);
-   // document.getElementById("grid").addEventListener("mouseover", prepareBeam);
+    $("#grid").children().children().mouseenter(findBeam);
+    $("#grid").children().children().mouseleave(removeBeam);
+    $("#grid").children().children().click(createBeam);
+
 
 }
 
+let realBeamParts = [];
+
+function removeBeam(beamparts){
+    for(part of realBeamParts){
+        part.removeAttribute("style");
+    }
+    realBeamParts = [];
+}
+
 function findBeam(e){
+    console.log(e.target.id);
     const row = e.target.parentNode;
     if(isSpecialTile(e.target)){
         return;
@@ -569,12 +581,11 @@ function findBeam(e){
 
     const tileNum = Number((e.target.id % 12) - 1);
     calculateBeam(row, tileNum);
-
+    
 }
 
 function calculateBeam(row, tileNum){
     const beamParts = row.children;
-    let realBeamParts = [];
     for(i = tileNum; i < beamParts.length; i++){
         if(isSpecialTile(beamParts[i])){
             break;
@@ -584,24 +595,31 @@ function calculateBeam(row, tileNum){
 
         }
     }
-    createBeam(realBeamParts);
+    prepareBeam(realBeamParts);
 
 }
 
-function createBeam(beamParts){
+function createBeam(){
 
-    for(part of beamParts){
+    for(part of realBeamParts){
         part.classList.add("wall");
+        part.style.backgroundColor = "var(--main-border-color)";
+
         mazeKey.push(tile.id);
     }
     updatePos(character.pos);
-    document.getElementById("grid").removeEventListener("click", findBeam);
     toggleBeamMode(placeBeamBtn);
+
+    $("#grid").children().children().unbind();
+
 }
 
-function prepareBeam(tile){
-    alert(tile.target.id);
-    tile.target.style.backgroundColor = "var(--main-border-color)";
+function prepareBeam(beamParts){
+    for(part of beamParts){
+        part.style.backgroundColor = "#8EFD96";
+
+    }
+
 }
 
 function isSpecialTile(tile){
