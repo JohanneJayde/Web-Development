@@ -395,6 +395,19 @@ function clearKey() {
 
 }
 
+document.getElementById("editBtn").addEventListener("click", displayEditMenu);
+
+function displayEditMenu(){
+    document.getElementById("editMaze").style.visibility = "visible";
+document.getElementById("saveMazeBtn").addEventListener("click", hideEditMenu);
+
+}
+
+function hideEditMenu(){
+    document.getElementById("editMaze").style.visibility = "hidden";
+
+}
+
 /*
 Process to do Maze Game:
 1. set initial position with class "charPos"
@@ -423,4 +436,3 @@ Laymens terms
 
 */
 
-//export {setLeftBounds, setRightBouunds, setUpperBounds, setLowerBouunds};

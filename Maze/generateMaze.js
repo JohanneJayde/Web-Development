@@ -1,6 +1,3 @@
-
-//import { setLeftBounds, setRightBouunds, setUpperBounds, setLowerBouunds } from "./maze.js";
-
 const tiles = document.getElementsByClassName("tile");
 
 const mazeKey = [];
@@ -11,7 +8,6 @@ function setBounds(){
     setLeftBounds();
     setRightBouunds();
 }
-
 
 //Setting the bounds for grid so that user cannot move outside of the bounds
 function setUpperBounds() {
@@ -77,18 +73,18 @@ function generateMaze(key){
         if(key.includes(tile.id)){
             tile.classList.add("border");
  
-
         }
     }
 
 }
 function writeMaze(mazeTile){
-  
+
             const msgLog = document.getElementById("mazeKey");
-
              msgLog.innerHTML += mazeTile + ", ";
-        
+    
+}
 
 
+function placeStartPos(){
 
 }
