@@ -1,6 +1,10 @@
 
 const tiles = document.getElementsByClassName("tile");
 
+const mazeKey = [];
+
+const editMode = false;
+
 class CharacterPiece {
 
     constructor(pos) {
@@ -396,6 +400,7 @@ function clearKey() {
 }
 
 document.getElementById("editBtn").addEventListener("click", displayEditMenu);
+document.getElementById("editBtn").addEventListener("click", convertTilesEditable);
 
 function displayEditMenu(){
     document.getElementById("editMaze").style.visibility = "visible";
@@ -405,6 +410,57 @@ document.getElementById("saveMazeBtn").addEventListener("click", hideEditMenu);
 
 function hideEditMenu(){
     document.getElementById("editMaze").style.visibility = "hidden";
+    cementTiles();
+
+}
+
+function convertTilesEditable(){
+    for(tile of tiles){
+        tile.addEventListener("click", addBorder);
+    }
+}
+
+function cementTiles(){
+    for(tile of tiles){
+        tile.removeEventListener("click", addBorder);
+    }
+}
+
+
+
+function addBorder(e){
+
+    if(Array.from(e.target.classList).includes("border")){
+
+    }
+    else{
+    e.target.classList.add("border");
+    console.log(e.target.id);
+    mazeKey.push(e.target.id);
+    writeMaze(e.target.id);
+    }
+}
+
+function generateMaze(key){
+    
+    for(const tile of tiles){
+
+        if(key.includes(tile.id)){
+            tile.classList.add("border");
+ 
+        }
+    }
+
+}
+function writeMaze(mazeTile){
+
+            const msgLog = document.getElementById("mazeKey");
+             msgLog.innerHTML += mazeTile + ", ";
+    
+}
+
+
+function placeStartPos(){
 
 }
 
