@@ -559,24 +559,30 @@ function beamMode(){
 
 function findBeam(e){
     const row = e.target.parentNode;
-    placeBeam(row);
+
+    const tileNum = Number((e.target.id % 12) - 1);
+
+    placeBeam(row, tileNum);
 }
 
-function placeBeam(row){
+function placeBeam(row, tileNum){
     const beamParts = row.children;
 
-    for(i = 1; i < beamParts.length; i++){
-        if(isBorder(beamParts[i]) || isBound(beamParts[i])){
-            break;
+    for(i = tileNum; i < beamParts.length; i++){
+        if(isBorder(beamParts[i]) || isBound(beamParts[i]) || character.pos === beamParts[i]){
+            alert("cannot place beam here");
         }
         else{
-        addBeam(beamParts[i]);
+        addBeamPart(beamParts[i]);
+
     }
     }
+    updatePos(character.pos);
+    document.getElementById("grid").removeEventListener("click", findBeam);
 
 }
 
-function addBeam(tile){
+function addBeamPart(tile){
     tile.classList.add("wall");
 
 }
