@@ -1,8 +1,8 @@
 const tiles = document.getElementsByClassName("tile");
 
-
-
-const editMode = false;
+let inEditMode = false;
+let inBeamMode = false;
+let inPlayableMode = false;
 
 class CharacterPiece {
 
@@ -549,10 +549,12 @@ function isBound(tile){
 
 }
 
-document.getElementById("placeBeamsBtn").addEventListener("click", beamMode);
+const placeBeamBtn = document.getElementById("placeBeamsBtn")
+placeBeamBtn.addEventListener("click", beamMode);
 
 
 function beamMode(){
+    toggleBeamMode(placeBeamBtn);
     cementTiles();
     document.getElementById("grid").addEventListener("click", findBeam);
 }
@@ -582,6 +584,8 @@ function placeBeam(row, tileNum){
     }
     updatePos(character.pos);
     document.getElementById("grid").removeEventListener("click", findBeam);
+    toggleBeamMode(placeBeamBtn);
+
 
 }
 
@@ -597,6 +601,17 @@ function isSpecialTile(tile){
         return true;
     }
         return false;
+}
+
+function toggleBeamMode(btn){
+    if(inBeamMode){
+        btn.style.backgroundColor = "var(--main-border-color)";
+
+    }else{
+        btn.style.backgroundColor = "yellow";
+        inBeamMode = true;
+
+    }
 }
 
 /*
