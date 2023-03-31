@@ -79,12 +79,22 @@ const key = ["15", "27", "28", "93", "101", "118", "103","105","106","128"];
 
 const character = new CharacterPiece(document.getElementsByClassName("tile")[77]);
 
-updatePos(character.pos);
-setUpperBounds();
-setLowerBouunds();
-setLeftBounds();
-setRightBouunds();
-generateMaze(key);
+
+function setBounds(){
+    setUpperBounds();
+    setLowerBouunds();
+    setLeftBounds();
+    setRightBouunds();
+}
+
+
+function startGame(){
+    updatePos(character.pos);
+    setBounds();
+    generateMaze(key);
+}
+
+
 function generateMaze(key){
     
     for(const tile of tiles){

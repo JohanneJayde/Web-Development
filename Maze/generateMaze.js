@@ -5,10 +5,14 @@ const tiles = document.getElementsByClassName("tile");
 
 const mazeKey = [];
 
-setUpperBounds();
-setLowerBouunds();
-setLeftBounds();
-setRightBouunds();
+function setBounds(){
+    setUpperBounds();
+    setLowerBouunds();
+    setLeftBounds();
+    setRightBouunds();
+}
+
+
 //Setting the bounds for grid so that user cannot move outside of the bounds
 function setUpperBounds() {
     const topRow = document.getElementById("rowOne").children;
