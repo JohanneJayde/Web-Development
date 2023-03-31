@@ -565,14 +565,19 @@ function findBeam(e){
 function placeBeam(row){
     const beamParts = row.children;
 
-    for(const part of beamParts){
-        if(isBorder(part) || isBound(part)){
-
+    for(i = 1; i < beamParts.length; i++){
+        if(isBorder(beamParts[i]) || isBound(beamParts[i])){
+            break;
         }
         else{
-        alert(part.id);
+        addBeam(beamParts[i]);
     }
     }
+
+}
+
+function addBeam(tile){
+    tile.classList.add("wall");
 
 }
 
