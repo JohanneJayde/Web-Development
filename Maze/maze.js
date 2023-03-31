@@ -1,7 +1,6 @@
-
 const tiles = document.getElementsByClassName("tile");
 
-const mazeKey = [];
+
 
 const editMode = false;
 
@@ -79,7 +78,7 @@ class CharacterPiece {
 
 }
 
-const key = ["15", "27", "28", "93", "101", "118", "103","105","106","128"];
+const mazeKey = ["15", "27", "28", "93", "101", "118", "103","105","106","128"];
 
 const character = new CharacterPiece(document.getElementsByClassName("tile")[77]);
 
@@ -95,7 +94,7 @@ function setBounds(){
 function startGame(){
     updatePos(character.pos);
     setBounds();
-    generateMaze(key);
+    generateMaze(mazeKey);
 }
 
 
@@ -407,9 +406,21 @@ function showEditorView(){
     convertTilesEditable();
     hidePlayableInfo();
     swapToEditorColors();
+    disableMovement();
 }
+
+function disableMovement(){
+    document.removeEventListener("keydown", move);
+    document.removeEventListener("keydown", highLightKey);
+    document.removeEventListener("keyup", clearKey);   
+}
+
 function swapToEditorColors(){
-    $(":root").css("--main-border-color", "#60FA6B");
+    $(":root").css("--main-border-color", "#60F36A");
+}
+
+function swapToPlayableColors(){
+    $(":root").css("--main-border-color", "#5DADE2");
 }
 
 function returnToPlayableView(){
@@ -418,11 +429,20 @@ function returnToPlayableView(){
 }
 
 function showPlayableInfo(){
-    document.getElementById("playableInfo").style.display = "inline";
+    document.getElementById("playableInfo").style.visibility = "visible";
+    swapToPlayableColors();
+    enableMovement();
+
+}
+
+function enableMovement(){
+    document.addEventListener("keydown", move);
+    document.addEventListener("keydown", highLightKey);
+    document.addEventListener("keyup", clearKey);   
 }
 
 function hidePlayableInfo(){
-    document.getElementById("playableInfo").style.display = "none";
+    document.getElementById("playableInfo").style.visibility = "hidden";
 }
 
 
