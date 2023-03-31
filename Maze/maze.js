@@ -81,12 +81,12 @@ class CharacterPiece {
 
 }
 
-const mazeKey = ["15", "27", "28", "93", "101", "118", "103","105","106","128"];
+const mazeKey = ["15", "27", "28", "93", "101", "118", "103", "105", "106", "128"];
 
 const character = new CharacterPiece(document.getElementsByClassName("tile")[77]);
 
 
-function setBounds(){
+function setBounds() {
     setUpperBounds();
     setLowerBouunds();
     setLeftBounds();
@@ -94,18 +94,18 @@ function setBounds(){
 }
 
 
-function startGame(){
+function startGame() {
     updatePos(character.pos);
     setBounds();
     generateMaze(mazeKey);
 }
 
 
-function generateMaze(key){
-    
-    for(const tile of tiles){
+function generateMaze(key) {
 
-        if(key.includes(tile.id)){
+    for (const tile of tiles) {
+
+        if (key.includes(tile.id)) {
             tile.classList.add("wall");
         }
     }
@@ -120,7 +120,7 @@ function updatePos(pos) {
 
     const posTile = Number(pos.id);
     writeToMovementOptions(character.getMoveOptions);
-  //  writeMoveStatuses(character.bounds);
+    //  writeMoveStatuses(character.bounds);
     normalMove(posTile);
 
 }
@@ -404,7 +404,7 @@ function clearKey() {
 document.getElementById("editBtn").addEventListener("click", showEditorView);
 
 
-function showEditorView(){
+function showEditorView() {
     displayEditMenu();
     convertTilesEditable();
     hidePlayableInfo();
@@ -412,44 +412,44 @@ function showEditorView(){
     disableMovement();
 }
 
-function disableMovement(){
+function disableMovement() {
     document.removeEventListener("keydown", move);
     document.removeEventListener("keydown", highLightKey);
-    document.removeEventListener("keyup", clearKey);   
+    document.removeEventListener("keyup", clearKey);
 }
 
-function swapToEditorColors(){
+function swapToEditorColors() {
     $(":root").css("--main-border-color", "#60F36A");
 }
 
-function swapToPlayableColors(){
+function swapToPlayableColors() {
     $(":root").css("--main-border-color", "#5DADE2");
 }
 
-function returnToPlayableView(){
+function returnToPlayableView() {
     hideEditMenu();
     showPlayableInfo();
 }
 
-function showPlayableInfo(){
+function showPlayableInfo() {
     document.getElementById("playableInfo").style.visibility = "visible";
     swapToPlayableColors();
     enableMovement();
 
 }
 
-function enableMovement(){
+function enableMovement() {
     document.addEventListener("keydown", move);
     document.addEventListener("keydown", highLightKey);
-    document.addEventListener("keyup", clearKey);   
+    document.addEventListener("keyup", clearKey);
 }
 
-function hidePlayableInfo(){
+function hidePlayableInfo() {
     document.getElementById("playableInfo").style.visibility = "hidden";
 }
 
 
-function displayEditMenu(){
+function displayEditMenu() {
     document.getElementById("editMaze").style.visibility = "visible";
     document.getElementById("saveMazeBtn").addEventListener("click", returnToPlayableView);
     document.getElementById("placeStartBtn").addEventListener("click", placeStartPos);
@@ -457,90 +457,90 @@ function displayEditMenu(){
 
 }
 
-function hideEditMenu(){
+function hideEditMenu() {
     document.getElementById("editMaze").style.visibility = "hidden";
     cementTiles();
 
 }
 
-function convertTilesEditable(){
-    for(tile of tiles){
+function convertTilesEditable() {
+    for (tile of tiles) {
         tile.addEventListener("click", addBorder);
     }
 }
 
-function cementTiles(){
-    for(tile of tiles){
+function cementTiles() {
+    for (tile of tiles) {
         tile.removeEventListener("click", addBorder);
     }
 }
 
 
 
-function addBorder(e){
+function addBorder(e) {
 
-    if(Array.from(e.target.classList).includes("wall")){
+    if (Array.from(e.target.classList).includes("wall")) {
 
     }
-    else{
-    e.target.classList.add("wall");
-    console.log(e.target.id);
-    mazeKey.push(e.target.id);
-   // writeMaze(e.target.id);
-    updatePos(character.pos);
+    else {
+        e.target.classList.add("wall");
+        console.log(e.target.id);
+        mazeKey.push(e.target.id);
+        // writeMaze(e.target.id);
+        updatePos(character.pos);
     }
 }
 
-function generateMaze(key){
-    
-    for(const tile of tiles){
+function generateMaze(key) {
 
-        if(key.includes(tile.id)){
+    for (const tile of tiles) {
+
+        if (key.includes(tile.id)) {
             tile.classList.add("wall");
- 
+
         }
     }
 
 }
-function writeMaze(mazeTile){
+function writeMaze(mazeTile) {
 
-            const msgLog = document.getElementById("mazeKey");
-             msgLog.innerHTML += mazeTile + ", ";
-    
+    const msgLog = document.getElementById("mazeKey");
+    msgLog.innerHTML += mazeTile + ", ";
+
 }
 
 
-function placeStartPos(){
-    
+function placeStartPos() {
+
     document.getElementById("grid").addEventListener("click", setStart)
 
 
 }
 
-function setStart(e){
+function setStart(e) {
 
-    if(isBound(e)){
+    if (isBound(e)) {
 
     }
-    else{
+    else {
         document.getElementsByClassName("charPos")[0].classList.remove("charPos");
 
-    if(isBorder(e.target.id.toString())){
-        e.target.classList.remove("wall");
+        if (isBorder(e.target.id.toString())) {
+            e.target.classList.remove("wall");
+        }
+
+        e.target.classList.add("charPos");
+
+        updatePos(e.target)
+
+        document.getElementById("grid").removeEventListener("click", setStart);
     }
-
-    e.target.classList.add("charPos");
-
-    updatePos(e.target)
-
-    document.getElementById("grid").removeEventListener("click", setStart);
-}
 }
 
-function isBound(tile){
+function isBound(tile) {
     const tileClasses = Array.from(tile.classList);
-    for(const tileClass of tileClasses){
-        if(tileClass === "border"){
+    for (const tileClass of tileClasses) {
+        if (tileClass === "border") {
             return true;
         }
     }
@@ -549,48 +549,71 @@ function isBound(tile){
 
 }
 
-const placeBeamBtn = document.getElementById("placeBeamsBtn")
-placeBeamBtn.addEventListener("click", beamMode);
+const placedHoriBeams = document.getElementById("placeHoriBeamsBtn");
+const placedVertBeams = document.getElementById("placeVertBeamsBtn");
+//placedVertBeams.addEventListener("click", beamVertMode);
+placedHoriBeams.addEventListener("click", beamMode);
 
+const $tiles =  $("#grid").children().children();
 
-function beamMode(){
-    toggleBeamMode(placeBeamBtn);
+function beamMode() {
+    toggleBeamMode(placedHoriBeams);
     cementTiles();
-    $("#grid").children().children().mouseenter(findBeam);
-    $("#grid").children().children().mouseleave(removeBeam);
-    $("#grid").children().children().click(createBeam);
+    $tiles.mouseenter(findBeam);
+    $tiles.mouseleave(removeBeam);
+    $tiles.click(createBeam);
 
+
+}
+
+function beamVertMode() {
+    toggleBeamMode(placedVertBeams);
+    cementTiles();
+    $tiles.mouseenter(findVertBeams);
+    $tiles.mouseleave(removeBeam);
+    //$tiles.click(createBeam);
 
 }
 
 let realBeamParts = [];
 
-function removeBeam(beamparts){
-    for(part of realBeamParts){
+function removeBeam(beamparts) {
+    for (part of realBeamParts) {
         part.removeAttribute("style");
     }
     realBeamParts = [];
 }
 
-function findBeam(e){
+function findVertBeams(e){
+    const colNumber = Number((e.target.id % 12) - 1);
+
+    for(i = 1; i <= tiles.length - 1; i++){
+        if((Number(tiles[i].id % 12) - 1) === colNumber){
+            console.log(tiles[i].id);
+        }
+    }
+    getVertBeeam();
+}
+
+function findBeam(e) {
     console.log(e.target.id);
     const row = e.target.parentNode;
-    if(isSpecialTile(e.target)){
+    if (isSpecialTile(e.target)) {
         return;
     }
 
     const tileNum = Number((e.target.id % 12) - 1);
     calculateBeam(row, tileNum);
-    
+
 }
 
-function calculateBeam(row, tileNum){
+function calculateBeam(row, tileNum) {
     const beamParts = row.children;
-    for(i = tileNum; i < beamParts.length; i++){
-        if(isSpecialTile(beamParts[i])){
+    for (i = tileNum; i < beamParts.length; i++) {
+        if (isSpecialTile(beamParts[i])) {
             break;
         }
-        else{
+        else {
             realBeamParts.push(beamParts[i]);
 
         }
@@ -599,43 +622,45 @@ function calculateBeam(row, tileNum){
 
 }
 
-function createBeam(){
+function createBeam() {
 
-    for(part of realBeamParts){
+    for (part of realBeamParts) {
         part.classList.add("wall");
         part.style.backgroundColor = "var(--main-border-color)";
 
         mazeKey.push(tile.id);
     }
     updatePos(character.pos);
-    toggleBeamMode(placeBeamBtn);
+    toggleBeamMode(placedHoriBeams);
 
-    $("#grid").children().children().unbind();
+    $tiles.off("mouseenter");
+    $tiles.off("mouseleave");
+    convertTilesEditable();
 
 }
 
-function prepareBeam(beamParts){
-    for(part of beamParts){
+function prepareBeam(beamParts) {
+    for (part of beamParts) {
         part.style.backgroundColor = "#8EFD96";
 
     }
 
 }
 
-function isSpecialTile(tile){
-    if(isBorder(tile) || isBound(tile) || character.pos === tile){
+function isSpecialTile(tile) {
+    if (isBorder(tile) || isBound(tile) || character.pos === tile) {
         return true;
     }
-        return false;
+    return false;
 }
 
-function toggleBeamMode(btn){
-    if(inBeamMode){
+function toggleBeamMode(btn) {
+    if (inBeamMode) {
         btn.style.backgroundColor = "var(--main-border-color)";
         inBeamMode = false;
 
 
-    }else{
+    } else {
         btn.style.backgroundColor = "yellow";
         inBeamMode = true;
 
