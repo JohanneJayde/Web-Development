@@ -120,7 +120,7 @@ function updatePos(pos) {
 
     const posTile = Number(pos.id);
     writeToMovementOptions(character.getMoveOptions);
-    //  writeMoveStatuses(character.bounds);
+    writeMoveStatuses(character.bounds);
     normalMove(posTile);
 
 }
@@ -357,16 +357,47 @@ function writeToMovementOptions(moveOptions) {
 }
 function writeMoveStatuses(moveStatus) {
 
-    const upMove = document.getElementById("upStatus");
-    upMove.innerHTML = moveStatus.up;
-    const downMove = document.getElementById("downStatus");
-    downMove.innerHTML = moveStatus.down;
-    const leftMove = document.getElementById("leftStatus");
-    leftMove.innerHTML = moveStatus.left;
-    const rightMove = document.getElementById("rightStatus");
-    rightMove.innerHTML = moveStatus.right;
+if(moveStatus.up){
+    document.getElementById("upKey").style.borderColor = "red";
+    document.getElementById("upKey").style.color = "black";
 
 }
+else{
+    document.getElementById("upKey").style.borderColor = "green";
+    document.getElementById("upKey").style.color = "black";
+}
+if(moveStatus.down){
+    document.getElementById("downKey").style.borderColor = "red";
+    document.getElementById("downKey").style.color = "black";
+
+}
+else{
+    document.getElementById("downKey").style.borderColor = "green";
+    document.getElementById("downKey").style.color = "black";
+}
+if(moveStatus.left){
+    document.getElementById("leftKey").style.borderColor = "red";
+    document.getElementById("leftKey").style.color = "black";
+
+}
+else{
+    document.getElementById("leftKey").style.borderColor = "green";
+    document.getElementById("leftKey").style.color = "black";
+}
+if(moveStatus.right){
+    document.getElementById("rightKey").style.borderColor = "red";
+    document.getElementById("rightKey").style.color = "black";
+
+}
+else{
+    document.getElementById("rightKey").style.borderColor = "green";
+    document.getElementById("rightKey").style.color = "black";
+}
+
+
+}
+
+
 
 function highLightKey(e) {
     if (!["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.key)) {
@@ -389,6 +420,7 @@ function highLightKey(e) {
         }
     }
 }
+
 
 function clearKey() {
 
