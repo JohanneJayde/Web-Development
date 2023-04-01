@@ -437,11 +437,15 @@ function clearKey() {
 
 document.getElementById("editBtn").addEventListener("click", showEditorView);
 
+const addWallBtn = document.getElementById("addWallBtn");
+const deleteWallsBtn = document.getElementById("deleteWallsBtn");
 
+addWallBtn.addEventListener("click", convertTilesEditable);
+deleteWallsBtn.addEventListener("click", makeWallsEditable);
 function showEditorView() {
     displayEditMenu();
-    convertTilesEditable();
-    makeWallsEditable();
+    //convertTilesEditable();
+   // makeWallsEditable();
     hidePlayableInfo();
     swapToEditorColors();
     disableMovement();
@@ -707,7 +711,6 @@ function createBeam() {
     inBeamMode = true;
     $tiles.off("mouseenter");
     $tiles.off("mouseleave");
-    convertTilesEditable();
 
 }
 
