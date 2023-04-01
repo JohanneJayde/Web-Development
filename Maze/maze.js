@@ -508,7 +508,8 @@ function makeWallsEditable(){
 
 function removeWall(e){
     e.target.classList.remove("wall");
-    e.target.addEventListener("click", addBorder);
+    e.target.removeAttribute("style");
+
 }
 
 function convertTilesEditable() {
@@ -752,6 +753,12 @@ function toggleBeamMode(mode) {
         inBeamMode = true;
 
     }
+}
+
+
+function disableInactiveButtonModes(mode){
+    
+    $(button).style.disabled  = "true";
 }
 
 /*
