@@ -549,6 +549,8 @@ function placeStartPos() {
    $tiles.click(setStart);
 
 
+
+
 }
 
 function setStart(e) {
@@ -566,7 +568,9 @@ function setStart(e) {
 
         updatePos(e.target)
 
-        document.getElementById("grid").removeEventListener("click", setStart);
+        $tiles.off("click");
+        convertTilesEditable();
+
     }
 }
 
