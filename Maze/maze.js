@@ -441,6 +441,7 @@ document.getElementById("editBtn").addEventListener("click", showEditorView);
 function showEditorView() {
     displayEditMenu();
     convertTilesEditable();
+    makeWallsEditable();
     hidePlayableInfo();
     swapToEditorColors();
     disableMovement();
@@ -497,6 +498,15 @@ function hideEditMenu() {
 
 }
 
+function makeWallsEditable(){
+    $(".wall").click(removeWall);
+}
+
+function removeWall(e){
+    e.target.classList.remove("wall");
+    e.target.addEventListener("click", addBorder);
+}
+
 function convertTilesEditable() {
     for (tile of tiles) {
         tile.addEventListener("click", addBorder);
@@ -546,9 +556,7 @@ function writeMaze(mazeTile) {
 
 function placeStartPos() {
     cementTiles();
-   $tiles.click(setStart);
-
-
+    $tiles.click(setStart);
 
 
 }
