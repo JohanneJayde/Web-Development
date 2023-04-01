@@ -545,21 +545,20 @@ function writeMaze(mazeTile) {
 
 
 function placeStartPos() {
-
-    document.getElementById("grid").addEventListener("click", setStart)
+    cementTiles();
+   $tiles.click(setStart);
 
 
 }
 
 function setStart(e) {
-
-    if (isBound(e)) {
+    if (isSpecialTile(e.target)) {
 
     }
     else {
         document.getElementsByClassName("charPos")[0].classList.remove("charPos");
 
-        if (isBorder(e.target.id.toString())) {
+        if (isBorder(e.target)) {
             e.target.classList.remove("wall");
         }
 
