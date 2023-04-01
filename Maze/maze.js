@@ -4,6 +4,8 @@ let inEditMode = false;
 let inBeamMode = false;
 let inPlayableMode = false;
 
+let  editMode = "";
+
 class CharacterPiece {
 
     constructor(pos) {
@@ -589,7 +591,9 @@ placedHoriBeams.addEventListener("click", beamMode);
 const $tiles =  $("#grid").children().children();
 
 function beamMode() {
-    toggleBeamMode(placedHoriBeams);
+    inBeamMode = false;
+    editMode = "horiBeam";
+    toggleBeamMode(editMode);
     cementTiles();
     $tiles.mouseenter(findBeam);
     $tiles.mouseleave(removeBeam);
@@ -599,7 +603,10 @@ function beamMode() {
 }
 
 function beamVertMode() {
-    toggleBeamMode(placedVertBeams);
+    editMode = "vertBeam";
+    inBeamMode = false;
+
+    toggleBeamMode(editMode);
     cementTiles();
     $tiles.mouseenter(findVertBeams);
     $tiles.mouseleave(removeBeam);
@@ -684,8 +691,9 @@ function createBeam() {
         mazeKey.push(tile.id);
     }
     updatePos(character.pos);
-    toggleBeamMode(placedHoriBeams);
 
+    toggleBeamMode(editMode);
+    inBeamMode = true;
     $tiles.off("mouseenter");
     $tiles.off("mouseleave");
     convertTilesEditable();
@@ -707,7 +715,19 @@ function isSpecialTile(tile) {
     return false;
 }
 
-function toggleBeamMode(btn) {
+function toggleBeamMode(mode) {
+
+    let btn = null;
+
+
+    if(mode === "vertBeam"){
+        btn = placedVertBeams; 
+    }
+    if(mode == "horiBeam"){
+        btn = placedHoriBeams; 
+
+    }
+
     if (inBeamMode) {
         btn.style.backgroundColor = "var(--main-border-color)";
         inBeamMode = false;

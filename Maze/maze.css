@@ -107,6 +107,8 @@ body {
     height: 50px;
     font-size: 25px;
     background-color: white;
+    text-align: center;
+
 }
 
 .key {
@@ -115,7 +117,7 @@ body {
     border: solid 2px black;
     background-color: white;
     font-size: 25px;
-    ;
+    text-align: center;
     color: black;
 }
 
@@ -151,6 +153,7 @@ button{
     background-color: var(--main-border-color);
     color: white;
     height: 50px;
+    width: 200px;
     border: solid 1px silver;
 }
 button:hover{
